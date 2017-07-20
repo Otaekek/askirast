@@ -1,0 +1,7 @@
+[package]
+name = "askirast"
+version = "0.1.0"
+authors = ["otae <rcargou@hotmail.fr>"]
+
+[dependencies]
+ncurses="*"
