@@ -2,7 +2,7 @@
 * @Author: otae
 * @Date:   2017-07-20 16:17:29
 * @Last Modified by:   otae
-* @Last Modified time: 2017-07-24 21:40:16
+* @Last Modified time: 2017-07-25 01:15:34
 */
 
 use float3::*;
@@ -37,9 +37,10 @@ impl<'a> GraphicObject<'a> {
 			for i in 0 .. 3 {
 				v[i].0 = v[i].0 + self.transform.position;
 				v[i].0 = v[i].0 - camera.position;
-			//	v[i].0.x /= v[i].0.length();
-			//	v[i].0.y /= v[i].0.length();
 				v[i].0.rotateFromDir(camera.direction);
+				v[i].0.x /= v[i].0.length() * 1.3;
+				v[i].0.y /= v[i].0.length();
+
 			}
 			fragments.push(Fragment{v1: v[0], v2: v[1], v3: v[2]});
 			i += 3;

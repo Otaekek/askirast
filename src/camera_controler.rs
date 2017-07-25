@@ -2,7 +2,7 @@
 * @Author: otae
 * @Date:   2017-07-23 14:13:00
 * @Last Modified by:   otae
-* @Last Modified time: 2017-07-24 21:39:44
+* @Last Modified time: 2017-07-24 22:07:08
 */
 
 use transform::*;
@@ -34,8 +34,8 @@ impl CameraControler {
 				101 => self.transform.position.y -= 0.01,
 				122 => self.transform.position.z += 0.01,
 				115 => self.transform.position.z -= 0.01,
-				113 => self.transform.position.x += 0.01,
-				100 => self.transform.position.x -= 0.01,
+				113 => self.transform.position.x -= 0.01,
+				100 => self.transform.position.x += 0.01,
 				_ => ()
 			}
 			c = getch();

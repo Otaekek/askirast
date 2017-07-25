@@ -5,3 +5,4 @@ authors = ["otae <rcargou@hotmail.fr>"]
 
 [dependencies]
 ncurses="*"
+nalgebra="*"

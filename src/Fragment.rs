@@ -2,12 +2,13 @@
 * @Author: otae
 * @Date:   2017-07-20 18:48:46
 * @Last Modified by:   otae
-* @Last Modified time: 2017-07-23 19:35:39
+* @Last Modified time: 2017-07-25 01:45:40
 */
 
 use float3::*;
 use frame_buffer::*;
 use float2::*;
+use color::*;
 
 fn min (x1: f32, x2: f32) -> i32 {
 	if (x1 < x2) {
@@ -65,13 +66,37 @@ impl Fragment {
 
 				let s: f32 = q.GetCrossProduct(vs2) / vs1.GetCrossProduct(vs2);
 				let t: f32 = vs1.GetCrossProduct(q) / vs1.GetCrossProduct(vs2);
-				let d: f32 = vr1.z * t + (1.0 - t) * vr3.z + vr2.z * s + (1.0 - s) * vr3.z;
-				if (d < fb.depth[y as usize][x as usize] && d > 0.0 && (s >= 0.0) && (t >= 0.0) && (s + t <= 1.0)) {
-					if self.v1.3.z != 0.0 { 
-						fb.frame[y as usize][x as usize] = 'X';
+				let d: f32 = vr3.z * t + (1.0 - t) * vr2.z + vr3.z * s + (1.0 - s) * vr1.z;
+				if (d < fb.depth[y as usize][x as usize] && d > 0.1 && (s >= 0.0) && (t >= 0.0) && (s + t <= 1.0)) {
+					if self.v1.3.z == 1.0 { 
+						fb.frame[y as usize][x as usize] = '1';
+						fb.colors[y as usize][x as usize] =
+							Color {color: 1};
+					}
+					else if self.v1.3.z == -1.0 {
+						fb.frame[y as usize][x as usize] = '2';
+						fb.colors[y as usize][x as usize] =
+							Color {color: 2};
+					}
+					else if self.v1.3.x == -1.0 {
+						fb.frame[y as usize][x as usize] = '3';
+						fb.colors[y as usize][x as usize] =
+							Color {color: 3};
+					}
+					else if self.v1.3.x == 1.0 {
+						fb.frame[y as usize][x as usize] = '4';
+						fb.colors[y as usize][x as usize] =
+							Color {color: 4};
+					}
+					else if self.v1.3.y == -1.0 {
+						fb.frame[y as usize][x as usize] = '5';
+						fb.colors[y as usize][x as usize] =
+							Color {color: 5};
 					}
 					else {
-						fb.frame[y as usize][x as usize] = 'O';
+						fb.frame[y as usize][x as usize] = '6';
+						fb.colors[y as usize][x as usize] =
+							Color {color: 6};
 					}
 					fb.depth[y as usize][x as usize] = d;
 				}
